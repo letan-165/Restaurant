@@ -1,0 +1,9 @@
+server:
+  port: 8085
+  servlet:
+    context-path: /logout_service
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://root:root@localhost:27017/Restaurant?authSource=admin

@@ -1,0 +1,9 @@
+server:
+  port: 8086
+  servlet:
+    context-path: /profile_service
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://root:root@localhost:27017/Restaurant?authSource=admin

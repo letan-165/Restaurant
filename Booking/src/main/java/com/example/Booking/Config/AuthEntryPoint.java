@@ -1,0 +1,31 @@
+package com.example.Booking.Config;
+
+import com.example.Booking.DTO.ApiResponse;
+import com.example.Booking.Exception.ErrolCode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.MediaType;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.AuthenticationEntryPoint;
+
+import java.io.IOException;
+
+public class AuthEntryPoint implements AuthenticationEntryPoint {
+    @Override
+    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+        ErrolCode errolCode = ErrolCode.UNAUTHENTICATED;
+
+        response.setStatus(errolCode.getHttpStatus().value());
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        ObjectMapper objectMapper = new ObjectMapper();
+        response.getWriter().write(objectMapper.writeValueAsString(ApiResponse.builder()
+                .code(errolCode.getCode())
+                .message(errolCode.getMessage())
+                .build()));
+
+        response.flushBuffer();
+
+    }
+}

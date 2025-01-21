@@ -1,0 +1,61 @@
+server:
+  port: 8888
+
+app:
+  api-prefix: /api/v1
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: user_service
+          uri: http://localhost:8080
+          predicates:
+            - Path=${app.api-prefix}/user_service/**
+          filters:
+            - StripPrefix=2
+
+        - id: menu_service
+          uri: http://localhost:8081
+          predicates:
+            - Path=${app.api-prefix}/menu_service/**
+          filters:
+            - StripPrefix=2
+
+        - id: table_service
+          uri: http://localhost:8082
+          predicates:
+            - Path=${app.api-prefix}/table_service/**
+          filters:
+            - StripPrefix=2
+
+        - id: booking_service
+          uri: http://localhost:8083
+          predicates:
+            - Path=${app.api-prefix}/booking_service/**
+          filters:
+            - StripPrefix=2
+
+        - id: invoice_service
+          uri: http://localhost:8084
+          predicates:
+            - Path=${app.api-prefix}/invoice_service/**
+          filters:
+            - StripPrefix=2
+#
+#        - id: logout_service
+#          uri: http://localhost:8085
+#          predicates:
+#            - Path=${app.api-prefix}/**
+#          filters:
+#            - StripPrefix=2
+#
+        - id: profile_service
+          uri: http://localhost:8086
+          predicates:
+            - Path=${app.api-prefix}/**
+          filters:
+            - StripPrefix=2
+
