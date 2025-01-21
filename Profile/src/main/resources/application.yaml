@@ -6,4 +6,4 @@ server:
 spring:
   data:
     mongodb:
-      uri: mongodb://mongo:hYepTfRAZGvepfYRSUvdXujaUKSGFNEW@mongodb.railway.internal:27017
+      uri: mongodb://mongo:hYepTfRAZGvepfYRSUvdXujaUKSGFNEW@viaduct.proxy.rlwy.net:27487/Restaurant?authSource=admin
