@@ -24,6 +24,6 @@ time:
 app:
   service:
     logout: http://localhost:8085/logout_service/logout
-    profile: http://localhost:8086/profile_service/profile
+    profile: http://restaurant.railway.internal:8086/profile_service/profile
 
 
