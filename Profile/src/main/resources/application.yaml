@@ -6,4 +6,4 @@ server:
 spring:
   data:
     mongodb:
-      uri: mongodb://mongo:hYepTfRAZGvepfYRSUvdXujaUKSGFNEW@viaduct.proxy.rlwy.net:27487
+      uri: mongodb://root:root@localhost:27017/Restaurant?authSource=admin
