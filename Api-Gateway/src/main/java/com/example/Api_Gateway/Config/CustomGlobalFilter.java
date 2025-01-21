@@ -57,7 +57,7 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
             return unauthenticated(exchange.getResponse(),"Header empty");
         }
 
-        String token = authHeader.getFirst().replace("Bearer","");
+        String token = authHeader.get(0).replace("Bearer","");
 
         return userService.introspect(token).flatMap(s -> {
             if(s.getResult()){

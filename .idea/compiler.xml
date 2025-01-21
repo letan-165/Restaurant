@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Invoice" />
+        <module name="Table" />
+        <module name="User" />
+        <module name="Logout" />
+        <module name="Booking" />
+        <module name="Menu" />
+        <module name="Api-Gateway" />
+        <module name="Profile" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Api-Gateway" options="-parameters" />
+      <module name="Booking" options="-parameters" />
+      <module name="Invoice" options="-parameters" />
+      <module name="Logout" options="-parameters" />
+      <module name="Menu" options="-parameters" />
+      <module name="Profile" options="-parameters" />
+      <module name="Table" options="-parameters" />
+      <module name="User" options="-parameters" />
+    </option>
+  </component>
+</project>
