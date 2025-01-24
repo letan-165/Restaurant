@@ -6,7 +6,7 @@ server:
 spring:
   data:
     mongodb:
-      uri: mongodb://mongo:root@viaduct.proxy.rlwy.net:27487/Restaurant?authSource=admin
+      uri: mongodb://mongo:twOHIfuEIvzHqZKtUsqAfsNLhKloUruX@viaduct.proxy.rlwy.net:37921/Restaurant?authSource=admin
 
 app:
   service:
