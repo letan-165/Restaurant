@@ -1,6 +1,6 @@
 package com.example.Booking.DTO.Request;
 
-import com.example.Booking.Entity.OrderItem;
+import com.example.Booking.DTO.OrderItem;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -12,5 +12,5 @@ import java.util.Set;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ListOrderItemRequest {
-    Set<OrderItem> orders;
+    Set<OrderItem> orderItems;
 }

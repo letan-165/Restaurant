@@ -19,6 +19,9 @@ public class User {
     String username;
     String password;
 
+    String phone;
+    String gmail;
+
     @ManyToOne
     Role role;
 }

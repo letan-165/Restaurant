@@ -11,7 +11,7 @@ spring:
     gateway:
       routes:
         - id: user_service
-          uri: http://restaurant.railway.internal:8080
+          uri: http://localhost:8080
           predicates:
             - Path=${app.api-prefix}/user_service/**
           filters:
@@ -44,18 +44,5 @@ spring:
             - Path=${app.api-prefix}/invoice_service/**
           filters:
             - StripPrefix=2
-#
-#        - id: logout_service
-#          uri: http://localhost:8085
-#          predicates:
-#            - Path=${app.api-prefix}/**
-#          filters:
-#            - StripPrefix=2
-#
-        - id: profile_service
-          uri: http://restaurant.railway.internal:8086
-          predicates:
-            - Path=${app.api-prefix}/**
-          filters:
-            - StripPrefix=2
+
 

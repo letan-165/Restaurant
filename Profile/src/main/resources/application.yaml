@@ -1,9 +1,0 @@
-server:
-  port: 8086
-  servlet:
-    context-path: /profile_service
-
-spring:
-  data:
-    mongodb:
-      uri: mongodb://mongo:hYepTfRAZGvepfYRSUvdXujaUKSGFNEW@viaduct.proxy.rlwy.net:27487/Restaurant?authSource=admin

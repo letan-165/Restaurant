@@ -28,7 +28,7 @@ public class SecurityConfig {
     @Value("${key.value}")
     String SIGN_KEY;
 
-    private final String[] ENDPOINT  = {"/auth/**" , "/user/**"};
+    private final String[] ENDPOINT  = {"/**"};
 
     @Autowired
     CustomJWTDecoder customJWTDecoder;
@@ -36,7 +36,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain web(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers(HttpMethod.POST, ENDPOINT).permitAll()
+                        .requestMatchers(ENDPOINT).permitAll()
                         .anyRequest().authenticated()
                     );
 

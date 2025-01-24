@@ -1,6 +1,5 @@
 package com.example.User.Service;
 
-import com.example.User.DTO.Request.ProfileRequest;
 import com.example.User.DTO.Request.UserSaveRequest;
 import com.example.User.DTO.Request.UserUpdateRequest;
 import com.example.User.DTO.Response.UserFindByIDResponse;
@@ -10,7 +9,6 @@ import com.example.User.Entity.User;
 import com.example.User.Exception.AppException;
 import com.example.User.Exception.ErrolCode;
 import com.example.User.Mapper.UserMapper;
-import com.example.User.Repository.HttpClient.ProfileClient;
 import com.example.User.Repository.RoleRepository;
 import com.example.User.Repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -20,7 +18,6 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -31,7 +28,6 @@ public class UserService {
     UserRepository userRepository;
     RoleRepository roleRepository;
     UserMapper userMapper;
-    ProfileClient profileClient;
 
     @Transactional
     public UserSaveResponse save(UserSaveRequest request){
@@ -44,11 +40,7 @@ public class UserService {
 
         user.setRole(role);
         User userSave = userRepository.save(user);
-        profileClient.save(ProfileRequest.builder()
-                        .userID(userSave.getUserID())
-                        .gmail(request.getGmail())
-                        .phone(request.getPhone())
-                        .build());
+
 
         return userMapper.toUserSaveResponse(userSave);
     }
@@ -62,13 +54,9 @@ public class UserService {
                 .orElseThrow(()->new AppException(ErrolCode.ROLE_NAME_NO_EXITS));
 
         user.setRole(role);
+        user.setGmail(request.getGmail());
+        user.setPhone(request.getPhone());
         userRepository.save(user);
-
-        profileClient.update(ProfileRequest.builder()
-                        .userID(userID)
-                        .gmail(request.getGmail())
-                        .phone(request.getPhone())
-                        .build());
 
         return userMapper.toUserSaveResponse(user);
     }
@@ -81,10 +69,8 @@ public class UserService {
         if (!userRepository.existsById(userID)) {
             throw new AppException(ErrolCode.USERNAME_NO_EXITS);
         }
-        if(profileClient.deleteById(userID).getResult()){
-            userRepository.deleteById(userID);
-            return true;
-        };
+        userRepository.deleteById(userID);
+
         return false;
     }
 

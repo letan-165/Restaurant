@@ -1,7 +1,7 @@
 package com.example.Booking.DTO.Request;
 
 
-import com.example.Booking.Entity.OrderItem;
+import com.example.Booking.DTO.OrderItem;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 

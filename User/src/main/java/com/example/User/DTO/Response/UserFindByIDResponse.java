@@ -17,5 +17,7 @@ public class UserFindByIDResponse {
     String userID;
     String username;
     String password;
+    String phone;
+    String gmail;
     Role role;
 }

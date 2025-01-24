@@ -1,5 +1,6 @@
 package com.example.Booking.Entity;
 
+import com.example.Booking.DTO.OrderItem;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.annotation.Id;

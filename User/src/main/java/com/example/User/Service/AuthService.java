@@ -3,11 +3,12 @@ package com.example.User.Service;
 import com.example.User.DTO.Request.LogoutRequest;
 import com.example.User.DTO.Request.TokenRequest;
 import com.example.User.DTO.Request.LoginRequest;
+import com.example.User.Entity.Logout;
 import com.example.User.Entity.User;
 import com.example.User.Exception.AppException;
 import com.example.User.Exception.ErrolCode;
 import com.example.User.Mapper.UserMapper;
-import com.example.User.Repository.HttpClient.LogoutClient;
+import com.example.User.Repository.LogoutRepository;
 import com.example.User.Repository.UserRepository;
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
@@ -39,7 +40,7 @@ import java.util.UUID;
 @Slf4j
 public class AuthService {
     UserRepository userRepository;
-    LogoutClient logoutClient;
+    LogoutRepository logoutRepository;
     UserMapper userMapper;
 
     @NonFinal
@@ -82,7 +83,7 @@ public class AuthService {
     public boolean logout(TokenRequest request){
         try{
             var verify = verifyToken(request.getToken(),false);
-            logoutClient.save(LogoutRequest.builder()
+            logoutRepository.save(Logout.builder()
                     .token(verify.getJWTClaimsSet().getJWTID())
                     .expiryTime(verify.getJWTClaimsSet().getExpirationTime())
                     .build());
@@ -149,7 +150,7 @@ public class AuthService {
         if(!(verified && expiryTime.after(new Date()))){
             throw new AppException(ErrolCode.TOKEN_EXPIRYTIME);
         }
-        if(logoutClient.existsById(signedJWT.getJWTClaimsSet().getJWTID()).getResult()){
+        if(logoutRepository.existsById(signedJWT.getJWTClaimsSet().getJWTID())){
             throw new AppException(ErrolCode.TOKEN_EXITS);
         }
         return signedJWT;

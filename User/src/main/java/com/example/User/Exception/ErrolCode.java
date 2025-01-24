@@ -21,8 +21,8 @@ public enum ErrolCode {
     TOKEN_EXPIRYTIME(1009,"Token expiry time", HttpStatus.BAD_REQUEST),
     TOKEN_EXITS(1010,"Token exits system", HttpStatus.BAD_REQUEST),
     TOKEN_REFRESH_FALSE(1011,"Token refresh false", HttpStatus.BAD_REQUEST),
-    PERMISSION_NAME_EXITS(10012," Permission name exited on system", HttpStatus.BAD_REQUEST),
-    PERMISSION_NAME_NO_EXITS(10013," Permission name not exited on system", HttpStatus.BAD_REQUEST),
+    PERMISSION_NAME_EXITS(1012," Permission name exited on system", HttpStatus.BAD_REQUEST),
+    PERMISSION_NAME_NO_EXITS(1013," Permission name not exited on system", HttpStatus.BAD_REQUEST),
     ;
 
     private int code;

@@ -1,10 +1,8 @@
 package com.example.User.Config;
 
-import com.example.User.DTO.Request.ProfileRequest;
 import com.example.User.Entity.Permission;
 import com.example.User.Entity.Role;
 import com.example.User.Entity.User;
-import com.example.User.Repository.HttpClient.ProfileClient;
 import com.example.User.Repository.PermissionRepository;
 import com.example.User.Repository.RoleRepository;
 import com.example.User.Repository.UserRepository;
@@ -15,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.*;
@@ -29,7 +26,6 @@ public class ApplicationRunnerConfig {
     RoleRepository roleRepository;
     PermissionRepository permissionRepository;
     UserRepository userRepository;
-    ProfileClient profileClient;
 
     @Bean
     ApplicationRunner applicationRunner(){
@@ -50,22 +46,17 @@ public class ApplicationRunnerConfig {
 
             }if(!roleRepository.existsById(role2.getRoleName())){
                 roleRepository.save(role2);
-
             }
 
             User user = User.builder()
                     .username("tan")
                     .password(passwordEncoder.encode("1"))
                     .role(role)
+                    .gmail("tan@1")
+                    .phone("0901")
                     .build();
-            if(!userRepository.existsByUsername(user.getUsername())){
-                User userSave = userRepository.save(user);
-                profileClient.save(ProfileRequest.builder()
-                                .userID(userSave.getUserID())
-                                .gmail("tan@gmail")
-                                .phone("090807")
-                        .build());
-
+            if (!userRepository.existsByUsername("tan")){
+                userRepository.save(user);
             }
         };
     }
