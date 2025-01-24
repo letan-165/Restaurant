@@ -30,23 +30,20 @@ public class TableService {
 
     public boolean save(TableSaveRequest request){
         if(tableRepository.existsById(request.getTableID())){
-            throw new AppException(ErrolCode.ERROL_OTHER);
+            throw new AppException(ErrolCode.TABLE_HAD_BOOKING);
         }
         tableRepository.save(tableMapper.toTable(request));
         return true;
     }
 
     public TableFindByIdResponse findById(String tableID){
-        if(!tableRepository.existsById(tableID)){
-            throw new AppException(ErrolCode.ERROL_OTHER);
-        }
         return tableMapper.toTableFindByIdResponse(tableRepository.findById(tableID)
-                .orElseThrow(()->new AppException(ErrolCode.ERROL_OTHER)));
+                .orElseThrow(()->new AppException(ErrolCode.TABLE_NO_EXISTS)));
     }
 
     public boolean deleteById(String tableID){
         if(!tableRepository.existsById(tableID)){
-            throw new AppException(ErrolCode.ERROL_OTHER);
+            throw new AppException(ErrolCode.TABLE_NO_EXISTS);
         }
         tableRepository.deleteById(tableID);
         return true;
@@ -54,7 +51,7 @@ public class TableService {
 
     public boolean update(String tableID, TableUpdateResponse request){
         if(!tableRepository.existsById(tableID)){
-            throw new AppException(ErrolCode.ERROL_OTHER);
+            throw new AppException(ErrolCode.TABLE_NO_EXISTS);
         }
         tableRepository.save(tableMapper.toTable(tableID, request));
         return true;

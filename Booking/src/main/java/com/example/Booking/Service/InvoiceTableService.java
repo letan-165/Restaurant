@@ -23,7 +23,7 @@ public class InvoiceTableService {
 
     Invoice findById(String invoiceID){
         return invoiceRepository.findById(invoiceID)
-                .orElseThrow(()->new AppException(ErrolCode.ERROL_OTHER));
+                .orElseThrow(()->new AppException(ErrolCode.INVOICE_NO_EXISTS));
     }
     //Trả về true nếu ko có table
     boolean checkTableID(String tableID){

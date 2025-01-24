@@ -28,10 +28,9 @@ public class InvoiceOrderItemService {
         return invoiceRepository.findById(invoiceID)
                 .orElseThrow(()->new AppException(ErrolCode.ERROL_OTHER));
     }
-    //Trả về true nếu ko có menu
-    boolean checkMenu(String itemID){
-        return menuRepository.findById(itemID) == null;
-    }
+
+
+
 
     public Set<OrderItem> findAll(String invoiceID){
         Invoice invoice = findById(invoiceID);
@@ -41,7 +40,11 @@ public class InvoiceOrderItemService {
     //Save base on (invoiceID and tableID)
     public boolean save(String invoiceID,OrderItem orderItem){
         Invoice invoice = findById(invoiceID);
-        if(invoice.getOrders().contains(orderItem) || checkMenu(orderItem.getItemID())){
+
+        menuRepository.findById(orderItem.getItemID())
+                .orElseThrow(()->new AppException(ErrolCode.MENU_NO_EXISTS));
+
+        if(invoice.getOrders().contains(orderItem)){
             return false;
         }
         invoice.getOrders().add(orderItem);
@@ -58,7 +61,8 @@ public class InvoiceOrderItemService {
         Invoice invoice = findById(invoiceID);
         Long total = orders.stream()
                 .mapToLong(orderItem -> {
-                    Menu menu = menuRepository.findById(orderItem.getItemID()).orElseThrow(()->new AppException(ErrolCode.ERROL_OTHER));
+                    Menu menu = menuRepository.findById(orderItem.getItemID())
+                            .orElseThrow(()->new AppException(ErrolCode.MENU_NO_EXISTS));
                     if ("BIG".equals(orderItem.getSize())) {
                         return menu.getPriceBig()*orderItem.getQuantity();
                     } else {

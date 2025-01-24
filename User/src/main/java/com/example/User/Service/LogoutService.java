@@ -45,9 +45,6 @@ public class LogoutService {
     }
 
     public LogoutRespone findByID(String token){
-        if(!logoutRepository.existsById(token)){
-            throw new AppException(ErrolCode.TOKEN_REFRESH_FALSE);
-        }
         return logoutMapper.toLogoutResponse(logoutRepository.findById(token)
                 .orElseThrow(()-> new AppException(ErrolCode.TOKEN_REFRESH_FALSE)));
     }

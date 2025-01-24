@@ -29,7 +29,7 @@ public class MenuService {
 
     public boolean save(MenuSaveRequest request) {
         if (menuRepository.existsById(request.getItemID())) {
-            throw new AppException(ErrolCode.ERROL_OTHER);
+            throw new AppException(ErrolCode.MENU_HAD_BOOKING);
         }
         menuRepository.save(menuMapper.toMenu(request));
         return true;
@@ -37,7 +37,7 @@ public class MenuService {
 
     public boolean deleteById(String itemID) {
         if (!menuRepository.existsById(itemID)) {
-            throw new AppException(ErrolCode.ERROL_OTHER);
+            throw new AppException(ErrolCode.MENU_NO_EXISTS);
         }
         menuRepository.deleteById(itemID);
         return true;
@@ -45,12 +45,12 @@ public class MenuService {
 
     public MenuFindByIdResponse findById(String itemID) {
         return menuMapper.toMenuFindByIdRequest(menuRepository.findById(itemID)
-                .orElseThrow(()->new AppException(ErrolCode.ERROL_OTHER)));
+                .orElseThrow(()->new AppException(ErrolCode.MENU_NO_EXISTS)));
     }
 
     public boolean update(MenuSaveRequest request) {
         if (!menuRepository.existsById(request.getItemID())) {
-            throw new AppException(ErrolCode.ERROL_OTHER);
+            throw new AppException(ErrolCode.MENU_NO_EXISTS);
         }
         menuRepository.save(menuMapper.toMenu(request));
         return true;

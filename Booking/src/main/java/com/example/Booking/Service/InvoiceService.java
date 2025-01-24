@@ -47,12 +47,12 @@ public class InvoiceService {
 
     public InvoiceFindByIdResponse findById(String invoiceID){
         return invoiceMapper.toInvoiceFindByIdResponse(invoiceRepository.findById(invoiceID)
-                .orElseThrow(()->new AppException(ErrolCode.ERROL_OTHER)));
+                .orElseThrow(()->new AppException(ErrolCode.INVOICE_NO_EXISTS)));
     }
 
     public boolean deleteById(String invoiceID){
         if(!invoiceRepository.existsById(invoiceID)){
-            throw new AppException(ErrolCode.ERROL_OTHER);
+            throw new AppException(ErrolCode.INVOICE_NO_EXISTS);
         }
         invoiceRepository.deleteById(invoiceID);
         return true;
@@ -61,7 +61,7 @@ public class InvoiceService {
     public boolean update(String invoiceID, InvoiceUpdateRequest request){
 
         Invoice invoice = invoiceRepository.findById(invoiceID)
-                .orElseThrow(()-> new AppException(ErrolCode.ERROL_OTHER));
+                .orElseThrow(()-> new AppException(ErrolCode.INVOICE_NO_EXISTS));
         invoice.setState(request.getState());
         try{
             invoiceRepository.save(invoice);
