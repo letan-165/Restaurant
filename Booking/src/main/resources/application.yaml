@@ -6,8 +6,8 @@ server:
 spring:
   data:
     mongodb:
-      uri: mongodb://mongo:twOHIfuEIvzHqZKtUsqAfsNLhKloUruX@viaduct.proxy.rlwy.net:37921/Restaurant?authSource=admin
+      uri: mongodb://root:root@localhost:27017/Restaurant?authSource=admin
 
 app:
   service:
-    user: http://restaurant-user.up.railway.app:8080/user_service/user
+    user: http://localhost:8080/user_service/user

@@ -11,14 +11,14 @@ spring:
     gateway:
       routes:
         - id: user_service
-          uri: http://restaurant-user.up.railway.app:8080
+          uri: http://localhost:8080
           predicates:
             - Path=${app.api-prefix}/user_service/**
           filters:
             - StripPrefix=2
 
         - id: booking_service
-          uri: http://restaurant-booking.up.railway.app:8083
+          uri: http://localhost:8083
           predicates:
             - Path=${app.api-prefix}/booking_service/**
           filters:
